@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/model/todo.dart';
+import 'package:note_apps/model/todo.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,13 +16,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(),
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key}) : super(key: key);
+  const MyHomePage({Key? key}) : super(key: key);
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -36,7 +36,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   initState() {
     super.initState();
-    print("initstate");
   }
 
   @override
@@ -47,32 +46,32 @@ class _MyHomePageState extends State<MyHomePage> {
           title: const Text("Catatan Apps"),
         ),
         body: Padding(
-          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 25),
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               TextFormField(
                 controller: _todoController,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               ElevatedButton(
                 onPressed: () {
                   setState(() {
-                    if (_todoController.text.length > 0) {
+                    if (_todoController.text.isNotEmpty) {
                       todos.add(Todo(_todoController.text));
                       _todoController.text = "";
                     }
                   });
                 },
-                child: Text("Tambah"),
+                child: const Text("Tambah"),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Expanded(
-                child: todos.length > 0
+                child: todos.isNotEmpty
                     ? ListView.builder(
                         itemCount: todos.length,
                         itemBuilder: (context, index) {
@@ -81,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  "${todos[index].name}",
+                                  "$todos[index].name",
                                 ),
                                 IconButton(
                                   onPressed: () {
@@ -99,7 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           );
                         },
                       )
-                    : Text(
+                    : const Text(
                         "Belum Ada Catatan",
                         textAlign: TextAlign.center,
                       ),
